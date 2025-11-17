@@ -6,16 +6,23 @@ Dieses Verzeichnis enthält alle Sprint-Planungen für das Sternenhaus-Projekt.
 
 ## 🏃 Aktuelle Sprints
 
-### Sprint 2 - Game Engine Basics
+### Sprint 3 - Resource & Economy Foundation
 - **Status:** Geplant
-- **Zeitraum:** 2025-12-02 - 2025-12-15
-- **Sprint Goal:** Lauffähiges Game Engine Backend mit Rundenlogik, KI-Integration und UI-Komponenten
-- **Stories:** 3 (E-004, E-005, E-006)
-- **Dokumente:** [Sprint 2](./sprint-2/)
+- **Zeitraum:** 2025-12-16 - 2025-12-29
+- **Sprint Goal:** Spielbares Wirtschafts-Fundament mit Territorium und Ressourcenproduktion
+- **Stories:** 4 (US-020, US-100, US-101, US-102)
+- **Dokumente:** [Sprint 3](./sprint-3/)
 
 ---
 
 ## ✅ Abgeschlossene Sprints
+
+### Sprint 2 - Game Engine Basics
+- **Status:** Abgeschlossen ✅
+- **Zeitraum:** 2025-12-02 - 2025-12-15
+- **Sprint Goal:** Lauffähiges Game Engine Backend mit Rundenlogik, KI-Integration und UI-Komponenten
+- **Stories:** 3 (E-004, E-005, E-006)
+- **Dokumente:** [Sprint 2](./sprint-2/)
 
 ### Sprint 1 - Technical Foundation
 - **Status:** Abgeschlossen ✅
@@ -30,18 +37,26 @@ Dieses Verzeichnis enthält alle Sprint-Planungen für das Sternenhaus-Projekt.
 
 | Sprint | Zeitraum | Stories | Status | Sprint Goal |
 |--------|----------|---------|--------|-------------|
-| [Sprint 2](./sprint-2/) | 2025-12-02 - 2025-12-15 | 3 | Geplant | Game Engine Basics (Turn Management, AI, UI) |
+| [Sprint 3](./sprint-3/) | 2025-12-16 - 2025-12-29 | 4 | Geplant | Resource & Economy Foundation (Territory + Production) |
+| [Sprint 2](./sprint-2/) | 2025-12-02 - 2025-12-15 | 3 | Abgeschlossen ✅ | Game Engine Basics (Turn Management, AI, UI) |
 | [Sprint 1](./sprint-1/) | 2025-11-17 - 2025-12-01 | 4 | Abgeschlossen ✅ | Technical Foundation (Firebase, Auth, Database) |
 
 ---
 
 ## 📈 Velocity-Tracking
 
-### Sprint 2 (Aktuell)
-- **Geplante Stories:** 3
-- **Geschätzter Aufwand:** 7-8 Tage
+### Sprint 3 (Aktuell)
+- **Geplante Stories:** 4
+- **Geschätzter Aufwand:** 7 Tage
 - **Tatsächlicher Aufwand:** _TBD_
 - **Velocity:** _TBD_
+
+### Sprint 2 (Abgeschlossen)
+- **Geplante Stories:** 3
+- **Abgeschlossene Stories:** 3 ✅
+- **Geschätzter Aufwand:** 7-8 Tage
+- **Tatsächlicher Aufwand:** ~7 Tage (geschätzt)
+- **Velocity:** 3 Stories / 2 Wochen
 
 ### Sprint 1 (Abgeschlossen)
 - **Geplante Stories:** 4
@@ -56,10 +71,10 @@ Dieses Verzeichnis enthält alle Sprint-Planungen für das Sternenhaus-Projekt.
 
 ### Phase 0: Technical Foundation (Enabler)
 - ✅ Sprint 0.1: Basis-Infrastruktur → **Sprint 1** (Abgeschlossen)
-- 🚧 Sprint 0.2: Game Engine Basics → **Sprint 2** (In Planung)
+- ✅ Sprint 0.2: Game Engine Basics → **Sprint 2** (Abgeschlossen)
 
 ### Phase 1: MVP Core Loop (Single Player)
-- 🔜 Sprint 1.1: Resource & Economy Foundation
+- 🚧 Sprint 1.1: Resource & Economy Foundation → **Sprint 3** (In Planung)
 - 🔜 Sprint 1.2: Territory & Control
 - 🔜 Sprint 1.3: Reputation & Influence Tracking
 - 🔜 Sprint 1.4: NPC Foundation
@@ -98,4 +113,4 @@ docs/sprints/sprint-{N}/
 
 ---
 
-**Letzte Aktualisierung:** 2025-11-17 (Sprint 2 hinzugefügt)
+**Letzte Aktualisierung:** 2025-11-17 (Sprint 3 hinzugefügt, Sprint 2 als abgeschlossen markiert)

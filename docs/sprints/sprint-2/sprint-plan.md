@@ -1,7 +1,7 @@
 # Sprint 2 - Game Engine Basics
 
 **Sprint-Zeitraum:** 2025-12-02 - 2025-12-15
-**Status:** Geplant
+**Status:** Completed
 **Dauer:** 2 Wochen
 
 ---
