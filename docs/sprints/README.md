@@ -61,7 +61,7 @@ Siehe [backlog-prioritized.md](../backlog-prioritized.md)
 
 ## 📝 Sprint-Planning-Prozess
 
-Jeder Sprint folgt dem 4-Phasen-Prozess:
+Jedes Sprint-Planing folgt dem 4-Phasen-Prozess:
 
 1. **Phase 1: Story-Auswahl** - Backlog analysieren, Stories vorschlagen
 2. **Phase 2: Diskussion** - Details klären, Akzeptanzkriterien verfeinern

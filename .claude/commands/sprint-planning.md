@@ -41,7 +41,7 @@ Falls bereits Sprints existieren:
 **Auswahlkriterien:**
 - Stories müssen alle Dependencies erfüllt haben
 - Enabler müssen VOR den abhängigen User Stories kommen
-- Sprint sollte 5-10 Stories enthalten (MVP-Phase) oder 3-5 Stories (spätere Phasen)
+- Sprint sollte eine sinnvolle Anzahl Stories enthalten (MVP-Phase: mehr, spätere Phasen: weniger)
 - Technische Machbarkeit gegeben (siehe Architektur-Docs)
 
 **Output Phase 1:**
@@ -53,20 +53,15 @@ Präsentiere dem User eine Liste mit:
 1. **E-001**: Web-Application Infrastructure Setup
    - Priorität: MUST-HAVE (Enabler)
    - Dependencies: Keine
-   - Geschätzter Aufwand: 3 Tage
 
 2. **E-002**: Database & Persistence Layer
    - Priorität: MUST-HAVE (Enabler)
    - Dependencies: E-001
-   - Geschätzter Aufwand: 2 Tage
 
 [...]
 
 ### Stories NICHT im Sprint (warum?):
 - **US-100**: Basis-Ressourcensystem → abhängig von E-002, E-003
-
-### Gesamtaufwand: ~10-12 Tage
-### Empfohlene Sprint-Länge: 2 Wochen
 ```
 
 **Frage den User:**
@@ -157,7 +152,6 @@ Präsentiere dem User eine detaillierte Analyse:
 #### Enabler (Technische Voraussetzungen)
 1. **E-001**: Web-Application Infrastructure Setup
    - Priorität: MUST-HAVE
-   - Aufwand: 3 Tage
    - Akzeptanzkriterien: [siehe user-stories.md]
 
 [...]
@@ -166,7 +160,6 @@ Präsentiere dem User eine detaillierte Analyse:
 1. **US-XXX**: [Titel]
    - Priorität: SHOULD-HAVE
    - Dependencies: E-001, E-002
-   - Aufwand: 2 Tage
    - Akzeptanzkriterien: [...]
 
 ### Definition of Done (Sprint-Level)
@@ -188,7 +181,6 @@ Präsentiere dem User eine detaillierte Analyse:
 ### Velocity
 - Stories: {X}
 - Story Points: {Y} (falls verwendet)
-- Geschätzter Aufwand: {Z Tage}
 ```
 
 **Frage den User:**
@@ -210,7 +202,6 @@ Präsentiere dem User eine detaillierte Analyse:
 ```markdown
 # Sprint {N} - {Sprint Goal Kurzform}
 
-**Sprint-Zeitraum:** {Start} - {Ende}
 **Status:** Geplant | In Progress | Completed
 
 ---
@@ -276,7 +267,6 @@ Dieses Dokument enthält die vollständigen Akzeptanzkriterien und technischen D
 
 ## Quick Info
 - **Sprint Goal:** {Kurzform}
-- **Zeitraum:** {Start} - {Ende}
 - **Anzahl Stories:** {X}
 
 ## Dokumente
@@ -297,7 +287,6 @@ Dieses Dokument enthält die vollständigen Akzeptanzkriterien und technischen D
 
 ### Sprint {N} - {Sprint Goal}
 - **Status:** In Progress
-- **Zeitraum:** {Start} - {Ende}
 - **Dokumente:** [Sprint {N}](./sprint-{N}/)
 
 ## Abgeschlossene Sprints
@@ -305,9 +294,9 @@ Dieses Dokument enthält die vollständigen Akzeptanzkriterien und technischen D
 {Liste abgeschlossener Sprints falls vorhanden}
 
 ## Sprint-Historie
-| Sprint | Zeitraum | Stories | Status | Sprint Goal |
-|--------|----------|---------|--------|-------------|
-| Sprint {N} | {Datum} - {Datum} | {X} | In Progress | {Goal} |
+| Sprint | Stories | Status | Sprint Goal |
+|--------|---------|--------|-------------|
+| Sprint {N} | {X} | In Progress | {Goal} |
 ```
 
 **Output Phase 4:**
