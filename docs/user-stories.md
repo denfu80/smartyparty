@@ -2,7 +2,22 @@
 
 **Version:** 2.0
 **Datum:** 2025-11-16
-**Status:** Überarbeitete Version mit Dependencies und Akzeptanzkriterien
+**Status:** ⚠️ **REFERENZ-DOKUMENT** - Für aktuelle Priorisierung siehe `backlog-prioritized.md`
+
+---
+
+## ℹ️ Hinweis zur Nutzung
+
+**Dieses Dokument ist ein REFERENZ-DOKUMENT** mit detaillierten User Stories, Abhängigkeiten und Akzeptanzkriterien.
+
+**Für die aktuelle Arbeitsreihenfolge, Sprint-Planung und Priorisierung siehe:**
+- 📋 **`backlog-prioritized.md`** - Priorisiertes Product Backlog (8 Release-Phasen, MVP-Definition)
+- 📊 **`backlog-analysis-summary.md`** - Executive Summary & Empfehlungen
+
+Dieses Dokument dient als Nachschlagewerk während der Implementierung für:
+- Detaillierte Akzeptanzkriterien
+- Story-Abhängigkeiten
+- Vollständige Feature-Beschreibungen
 
 ---
 
