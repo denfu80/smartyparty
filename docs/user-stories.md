@@ -80,16 +80,19 @@
 
 ### 0.2 Spielstart & Basis-Mechaniken
 
-**US-010:** Als neuer Spieler möchte ich ein rundenbasiertes Hotseat-Spiel starten können, damit ich mit Freunden am selben Gerät spielen kann.
+**US-010:** Als neuer Spieler möchte ich ein rundenbasiertes Online-Multiplayer-Spiel (Web-App) starten können, damit ich asynchron mit anderen Spielern online spielen kann.
 
 **Abhängigkeiten:**
 - Keine (Einstiegspunkt)
 
 **Akzeptanzkriterien:**
-- [ ] Spiel unterstützt 2-6 Spieler am selben Gerät
-- [ ] Rundenbasiertes System mit klarem Rundenwechsel
+- [ ] Web-App unterstützt 2-6 Spieler online
+- [ ] Rundenbasiertes System: Alle Spieler spielen ihre Runde asynchron
+- [ ] Wenn alle Spieler fertig sind, startet automatisch die nächste Runde
 - [ ] Jeder Spieler hat eigene Sicht/Informationen
-- [ ] Spielstand kann gespeichert/geladen werden
+- [ ] Spieler können sich jederzeit einloggen und ihren Zug machen
+- [ ] Persistenter Spielstand in Datenbank
+- [ ] **Ausbaustufe:** Konfigurierbarer Timer bis wann Züge gemacht werden müssen
 
 ---
 
