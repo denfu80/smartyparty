@@ -9,7 +9,7 @@ Sternenhaus vereint die Tiefe klassischer Handelssimulationen mit der emergenten
 
 Die Menschheit hat die Sterne kolonisiert. Raumstationen ersetzen mittelalterliche Städte, Handelskonvois durchqueren den Raum statt Landstraßen. In diesem Vakuum der Macht haben sich Adelshäuser formiert - nicht durch Geburtsrecht, sondern durch wirtschaftliche Dominanz, militärische Stärke und politischen Einfluss.
 
-Das Spiel ist rundenbasiert im klassischen Hotseat-Modus angelegt, sodass Spieler am selben Gerät gegeneinander antreten. Doch anders als bei traditionellen Wirtschaftssimulationen ist die Welt nicht statisch. Durch den Einsatz von KI-Systemen reagiert das Universum dynamisch auf Spielerentscheidungen, generiert glaubwürdige Charaktere und erschafft emergente Geschichten.
+Das Spiel ist als rundenbasiertes Online-Multiplayer-Spiel konzipiert - eine Web-App, in der alle Spieler asynchron ihre Runden spielen. Sobald alle Spieler ihre Züge abgeschlossen haben, beginnt die nächste Runde. In einer späteren Ausbaustufe können Timer konfiguriert werden, bis wann alle ihre Runde gespielt haben müssen. Anders als bei traditionellen Wirtschaftssimulationen ist die Welt nicht statisch. Durch den Einsatz von KI-Systemen reagiert das Universum dynamisch auf Spielerentscheidungen, generiert glaubwürdige Charaktere und erschafft emergente Geschichten.
 
 ## Die zwei Säulen: Reputation und Einfluss
 
