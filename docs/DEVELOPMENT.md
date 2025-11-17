@@ -165,27 +165,32 @@ Das Dashboard ist durch ein Layout geschützt:
 
 ## Deployment
 
-### Firebase Hosting
+### Manuelles Deployment
 
 1. Build erstellen:
 ```bash
 npm run build
 ```
 
-2. Export für Static Hosting:
-```bash
-npx next export
-```
-
-3. Deploy:
+2. Deploy zu Firebase Hosting:
 ```bash
 firebase deploy --only hosting
 ```
 
-### GitHub Actions (CI/CD)
+### Automatisches Deployment (CI/CD)
 
-Bei Push zu `main` wird automatisch deployed:
-- `.github/workflows/deploy.yml` (wird in E-003 CI/CD erstellt)
+Bei Push zu `main` wird automatisch deployed via GitHub Actions.
+
+**Setup:** Siehe [CI-CD-SETUP.md](./CI-CD-SETUP.md) für detaillierte Anleitung
+
+**Workflow:**
+- `.github/workflows/deploy.yml`
+- Bei Push zu `main`: Automatischer Deploy
+- Bei Pull Requests: Build-Check ohne Deploy
+
+**Benötigte GitHub Secrets:**
+- `FIREBASE_SERVICE_ACCOUNT`
+- `NEXT_PUBLIC_FIREBASE_*` (alle Firebase Config Variablen)
 
 ## Troubleshooting
 

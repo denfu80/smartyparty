@@ -1,7 +1,7 @@
 # Sprint 1 - Technical Foundation
 
 **Sprint-Zeitraum:** 2025-11-17 - 2025-12-01
-**Status:** Geplant
+**Status:** In Abschluss (alle Stories implementiert)
 **Dauer:** 2 Wochen
 
 ---
@@ -23,25 +23,29 @@
 
 ### Enabler (Technische Voraussetzungen)
 
-#### 1. E-001: Web-Application Infrastructure Setup
+#### 1. ✅ E-001: Web-Application Infrastructure Setup
+- **Status**: ERLEDIGT
 - **Priorität**: MUST-HAVE
 - **Aufwand**: 2-3 Tage
 - **Dependencies**: Keine
 - **Akzeptanzkriterien**: [siehe story-details.md](./story-details.md#e-001-web-application-infrastructure-setup)
 
-#### 2. E-002: Database & Persistence Layer
+#### 2. ✅ E-002: Database & Persistence Layer
+- **Status**: ERLEDIGT
 - **Priorität**: MUST-HAVE
 - **Aufwand**: 2-3 Tage
 - **Dependencies**: E-001
 - **Akzeptanzkriterien**: [siehe story-details.md](./story-details.md#e-002-database--persistence-layer)
 
-#### 3. E-003: Authentication & User Management
+#### 3. ✅ E-003: Authentication & User Management
+- **Status**: ERLEDIGT
 - **Priorität**: MUST-HAVE
 - **Aufwand**: 2 Tage
 - **Dependencies**: E-001, E-002
 - **Akzeptanzkriterien**: [siehe story-details.md](./story-details.md#e-003-authentication--user-management)
 
-#### 4. CI/CD Pipeline (GitHub Actions)
+#### 4. ✅ CI/CD Pipeline (GitHub Actions)
+- **Status**: ERLEDIGT
 - **Priorität**: SHOULD-HAVE
 - **Aufwand**: 0.5 Tage
 - **Dependencies**: E-001
@@ -143,3 +147,4 @@ Sprint 2 wird E-004 (Turn Management), E-005 (AI Integration), E-006 (UI Compone
 
 **Erstellt:** 2025-11-17
 **Letzte Aktualisierung:** 2025-11-17
+**Abgeschlossen:** 2025-11-17
