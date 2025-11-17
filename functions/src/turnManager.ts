@@ -221,6 +221,76 @@ export const onPlayerReady = functions.firestore
   });
 
 /**
+ * US-102: Calculate and apply resource production for all players
+ */
+async function calculateProduction(gameId: string): Promise<void> {
+  const INVENTORY_CAPACITY = 500;
+  const gameRef = db.collection('games').doc(gameId);
+
+  const playersSnapshot = await gameRef.collection('players').get();
+
+  for (const playerDoc of playersSnapshot.docs) {
+    const player = playerDoc.data();
+    const playerId = player.id;
+
+    // Get all stations controlled by this player
+    const stationsSnapshot = await gameRef
+      .collection('stations')
+      .where('controlledBy', '==', playerId)
+      .get();
+
+    // Calculate total production
+    const productionSummary: { [resourceType: string]: number } = {};
+
+    for (const stationDoc of stationsSnapshot.docs) {
+      const station = stationDoc.data();
+
+      if (station.resourceProduction) {
+        for (const [resourceType, production] of Object.entries(station.resourceProduction)) {
+          if (!productionSummary[resourceType]) {
+            productionSummary[resourceType] = 0;
+          }
+          productionSummary[resourceType] += (production as any).amountPerRound;
+        }
+      }
+    }
+
+    // Update player resources with capacity limit
+    const newResources = { ...(player.resources || {}) };
+
+    for (const [resourceType, amount] of Object.entries(productionSummary)) {
+      newResources[resourceType] = (newResources[resourceType] || 0) + amount;
+    }
+
+    // Check capacity limit
+    const totalResources = Object.values(newResources).reduce(
+      (sum: number, qty: any) => sum + (qty as number),
+      0
+    );
+
+    if (totalResources > INVENTORY_CAPACITY) {
+      // Proportionally reduce resources to fit capacity
+      const factor = INVENTORY_CAPACITY / totalResources;
+      for (const resourceType in newResources) {
+        newResources[resourceType] = Math.floor(newResources[resourceType] * factor);
+      }
+
+      functions.logger.warn(
+        `Player ${playerId} hit capacity limit. Reduced from ${totalResources} to ${INVENTORY_CAPACITY}`
+      );
+    }
+
+    // Update player
+    await playerDoc.ref.update({
+      resources: newResources,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+    });
+
+    functions.logger.info(`Player ${playerId} production:`, productionSummary);
+  }
+}
+
+/**
  * Internal: Process round end logic
  */
 async function processRoundEndLogic(gameId: string, currentRound: number): Promise<void> {
@@ -240,12 +310,16 @@ async function processRoundEndLogic(gameId: string, currentRound: number): Promi
     // 3. Execute actions
     await executeActions(gameId, validatedActions);
 
-    // 4. Transition to next_round_starting
+    // 4. US-102: Calculate resource production (NEW!)
+    await calculateProduction(gameId);
+    functions.logger.info(`Calculated resource production for game ${gameId}`);
+
+    // 5. Transition to next_round_starting
     await gameRef.update({
       'roundState.currentPhase': 'next_round_starting',
     });
 
-    // 5. Start next round
+    // 6. Start next round
     await startNextRound(gameId);
 
     functions.logger.info(`Successfully completed round ${currentRound} for game ${gameId}`);

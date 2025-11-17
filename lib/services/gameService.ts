@@ -1,7 +1,9 @@
-import { collection, doc, getDoc, getDocs, addDoc, updateDoc, onSnapshot, query, where, Timestamp } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc, onSnapshot, query, where, Timestamp, writeBatch } from 'firebase/firestore';
 import { db, functions } from '@/lib/firebase/config';
 import { httpsCallable } from 'firebase/functions';
-import type { Game, RoundState } from '@/lib/types/game';
+import type { Game, RoundState, Station, Player } from '@/lib/types/game';
+import { createGameStations } from '@/lib/seeders/stationSeeder';
+import { INITIAL_RESOURCES, ResourceType } from '@/lib/config/resources';
 
 export async function createGame(name: string, createdBy: string, maxPlayers: number = 4): Promise<string> {
   const docRef = await addDoc(collection(db, 'games'), {
@@ -18,7 +20,67 @@ export async function createGame(name: string, createdBy: string, maxPlayers: nu
     } as RoundState,
     createdAt: Timestamp.now()
   });
-  return docRef.id;
+
+  const gameId = docRef.id;
+
+  // US-020, US-101: Initialize stations for the new game
+  await initializeGameStations(gameId);
+
+  return gameId;
+}
+
+/**
+ * US-020, US-101: Initialize stations for a new game
+ */
+async function initializeGameStations(gameId: string): Promise<void> {
+  const stations = createGameStations(gameId);
+  const batch = writeBatch(db);
+
+  stations.forEach((station) => {
+    const stationRef = doc(db, 'games', gameId, 'stations', station.id);
+    batch.set(stationRef, station);
+  });
+
+  await batch.commit();
+}
+
+/**
+ * US-100: Initialize player with starting resources
+ */
+export async function addPlayerToGame(gameId: string, userId: string, displayName: string): Promise<void> {
+  // Check if this is the first player
+  const playersSnapshot = await getDocs(collection(db, 'games', gameId, 'players'));
+  const isFirstPlayer = playersSnapshot.empty;
+
+  const playerData: Partial<Player> = {
+    id: userId,
+    userId,
+    gameId,
+    displayName,
+    credits: 10000, // Starting credits
+    influence: 0,
+    resources: {
+      [ResourceType.METALS]: INITIAL_RESOURCES[ResourceType.METALS],
+      [ResourceType.ENERGY]: INITIAL_RESOURCES[ResourceType.ENERGY],
+      [ResourceType.FOOD]: INITIAL_RESOURCES[ResourceType.FOOD],
+      [ResourceType.COMPONENTS]: INITIAL_RESOURCES[ResourceType.COMPONENTS],
+      [ResourceType.LUXURY_GOODS]: INITIAL_RESOURCES[ResourceType.LUXURY_GOODS],
+    },
+    controlledStations: isFirstPlayer ? ['station-1'] : [], // First player gets Alpha Station
+    isReady: false,
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
+  };
+
+  await addDoc(collection(db, 'games', gameId, 'players'), playerData);
+
+  // If first player, assign them control of station-1
+  if (isFirstPlayer) {
+    const stationRef = doc(db, 'games', gameId, 'stations', 'station-1');
+    await updateDoc(stationRef, {
+      controlledBy: userId,
+    });
+  }
 }
 
 export async function getGame(gameId: string): Promise<Game | null> {
@@ -83,4 +145,16 @@ export async function processRoundEnd(gameId: string): Promise<{ success: boolea
   const processRoundEndFn = httpsCallable(functions, 'processRoundEnd');
   const result = await processRoundEndFn({ gameId });
   return result.data as { success: boolean; message: string; newRound: number };
+}
+
+/**
+ * US-020: Purchase a station (callable function)
+ */
+export async function purchaseStation(
+  gameId: string,
+  stationId: string
+): Promise<{ success: boolean; newCredits: number; stationName: string; price: number }> {
+  const purchaseStationFn = httpsCallable(functions, 'purchaseStation');
+  const result = await purchaseStationFn({ gameId, stationId });
+  return result.data as { success: boolean; newCredits: number; stationName: string; price: number };
 }
