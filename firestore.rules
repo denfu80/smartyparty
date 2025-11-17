@@ -10,16 +10,52 @@ service cloud.firestore {
       return request.auth.uid == userId;
     }
 
+    function isGamePlayer(gameId) {
+      return exists(/databases/$(database)/documents/games/$(gameId)/players/$(request.auth.uid));
+    }
+
+    // Users collection
     match /users/{userId} {
       allow read: if isSignedIn();
       allow write: if isOwner(userId);
     }
 
+    // Games collection
     match /games/{gameId} {
       allow read: if isSignedIn();
       allow create: if isSignedIn();
       allow update: if isSignedIn();
       allow delete: if false;
+
+      // Game players subcollection
+      match /players/{playerId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn();
+        allow update: if isSignedIn() && (isOwner(playerId) || isGamePlayer(gameId));
+        allow delete: if false;
+      }
+
+      // Player actions subcollection
+      match /actions/{actionId} {
+        allow read: if isSignedIn() && isGamePlayer(gameId);
+        allow create: if isSignedIn() && isGamePlayer(gameId);
+        allow update: if false; // Actions are immutable once created
+        allow delete: if false;
+      }
+
+      // Game events subcollection
+      match /events/{eventId} {
+        allow read: if isSignedIn() && isGamePlayer(gameId);
+        allow create: if false; // Only Cloud Functions can create events
+        allow update: if false;
+        allow delete: if false;
+      }
+    }
+
+    // AI cache collection (read-only for clients, managed by Cloud Functions)
+    match /ai-cache/{cacheId} {
+      allow read: if isSignedIn();
+      allow write: if false; // Only Cloud Functions can write to cache
     }
   }
 }
