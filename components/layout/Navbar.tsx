@@ -72,6 +72,9 @@ export function Navbar() {
                     <p className="text-xs leading-none text-muted-foreground">
                       {user?.email}
                     </p>
+                    <p className="text-xs leading-none text-muted-foreground font-mono">
+                      v{process.env.NEXT_PUBLIC_COMMIT_HASH?.substring(0, 7) || 'dev'}
+                    </p>
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
