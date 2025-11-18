@@ -3,7 +3,11 @@
 **Version:** 1.0
 **Datum:** 2025-11-17
 **Product Owner:** [Projekt-Team]
-**Status:** Ready for Development
+**Status:** 📚 **ARCHIV** - Ersetzt durch **[product-backlog.md](./product-backlog.md)**
+
+> ⚠️ **Hinweis (2025-11-18):** Dieses Dokument wurde archiviert.
+> Die Phasen-basierte Struktur wurde ersetzt durch eine Vertical-Slice-Priorisierung.
+> Siehe **product-backlog.md** für die aktuelle Roadmap.
 
 ---
 
