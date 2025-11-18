@@ -13,6 +13,11 @@ import { db } from '@/lib/firebase/config';
 import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore';
 import type { Game, Player, Station } from '@/lib/types/game';
 
+// For static export: This page is client-side only, no pre-rendering needed
+export function generateStaticParams() {
+  return [];
+}
+
 export default function GamePage() {
   const params = useParams();
   const gameId = params?.gameId as string;
