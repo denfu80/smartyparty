@@ -82,3 +82,13 @@ export interface Player {
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }
+
+// US-001, US-002: NPCs
+export interface NPC {
+  id: string;
+  name: string;
+  personality: string[];
+  greeting: string;
+  avatar?: string;
+  description?: string;
+}
