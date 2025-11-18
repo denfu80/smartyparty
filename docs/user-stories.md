@@ -2,7 +2,11 @@
 
 **Version:** 2.0
 **Datum:** 2025-11-16
-**Status:** ⚠️ **REFERENZ-DOKUMENT** - Für aktuelle Priorisierung siehe `backlog-prioritized.md`
+**Status:** 📚 **ARCHIV** - Für aktuelle Priorisierung siehe **[product-backlog.md](./product-backlog.md)**
+
+> ⚠️ **Hinweis (2025-11-18):** Dieses Dokument wurde archiviert.
+> Alle Stories wurden konsolidiert in **product-backlog.md**.
+> Dieses Dokument bleibt als Referenz für detaillierte Story-Beschreibungen.
 
 ---
 
