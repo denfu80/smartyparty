@@ -24,7 +24,14 @@ export async function createGame(name: string, createdBy: string, maxPlayers: nu
   const gameId = docRef.id;
 
   // US-020, US-101: Initialize stations for the new game
-  await initializeGameStations(gameId);
+  try {
+    await initializeGameStations(gameId);
+    console.log(`✅ Stations initialized for game ${gameId}`);
+  } catch (error) {
+    console.error('⚠️ Failed to initialize stations (Firestore rules not deployed yet?):', error);
+    // Don't fail game creation if stations can't be initialized
+    // Stations can be initialized later when rules are deployed
+  }
 
   return gameId;
 }

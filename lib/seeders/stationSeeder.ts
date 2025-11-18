@@ -117,17 +117,27 @@ export function createGameStations(gameId: string, firstPlayerId?: string): Stat
       }
     }
 
-    return {
+    // Build base station object
+    const station: Station = {
       id: template.id,
       gameId,
       name: template.name,
       position: template.position,
       strategicValue: template.strategicValue,
       defenseLevel: 1, // Default defense level
-      // First station (Alpha) is controlled by first player, others are neutral
-      controlledBy: index === 0 && firstPlayerId ? firstPlayerId : undefined,
-      resourceProduction: Object.keys(resourceProduction).length > 0 ? resourceProduction : undefined
     };
+
+    // Only add controlledBy if it has a value (first station and firstPlayerId exists)
+    if (index === 0 && firstPlayerId) {
+      station.controlledBy = firstPlayerId;
+    }
+
+    // Only add resourceProduction if it exists
+    if (Object.keys(resourceProduction).length > 0) {
+      station.resourceProduction = resourceProduction;
+    }
+
+    return station;
   });
 }
 

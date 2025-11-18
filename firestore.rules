@@ -50,6 +50,14 @@ service cloud.firestore {
         allow update: if false;
         allow delete: if false;
       }
+
+      // US-020: Stations subcollection (Sprint 3)
+      match /stations/{stationId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn(); // Allow creation during game setup
+        allow update: if false; // Only Cloud Functions can update (via purchaseStation)
+        allow delete: if false;
+      }
     }
 
     // AI cache collection (read-only for clients, managed by Cloud Functions)
