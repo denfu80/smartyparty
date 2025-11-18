@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { createGame, listGames, getGame } from '@/lib/services/gameService';
 import { useAuth } from '@/lib/hooks/useAuth';
 import type { Game } from '@/lib/types/game';
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const router = useRouter();
   const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,11 +43,8 @@ export default function DashboardPage() {
       const gameId = await createGame('Test Game', user.uid, 4);
       console.log('Game created with ID:', gameId);
 
-      const game = await getGame(gameId);
-      console.log('Game retrieved:', game);
-
-      await loadGames();
-      alert(`Spiel erstellt! ID: ${gameId}`);
+      // Navigate to the game page
+      router.push(`/game/${gameId}`);
     } catch (err) {
       console.error('Error creating game:', err);
       alert('Fehler beim Erstellen des Spiels');
