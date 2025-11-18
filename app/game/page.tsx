@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { GameLayout } from '@/components/layout/GameLayout';
 import { ResourceInventory } from '@/components/game/ResourceInventory';
 import { ProductionSummary } from '@/components/game/ProductionSummary';
@@ -14,8 +14,10 @@ import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestor
 import type { Game, Player, Station } from '@/lib/types/game';
 
 export default function GamePage() {
-  const params = useParams();
-  const gameId = params?.gameId as string;
+  // Parse gameId from URL pathname (e.g., /game/abc123 -> abc123)
+  const pathname = usePathname();
+  const gameId = pathname.split('/game/')[1]?.split('/')[0] || '';
+
   const { user } = useAuth();
 
   const [game, setGame] = useState<Game | null>(null);
