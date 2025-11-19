@@ -6,6 +6,9 @@ import HomePage from './HomePage';
 import LoginPage from './login/page';
 import DashboardPage from './dashboard/page';
 import GameClient from './game/[...id]/GameClient';
+import TradePage from './game/[...id]/TradePage';
+import TerritoryPage from './game/[...id]/TerritoryPage';
+import NPCsPage from './game/[...id]/NPCsPage';
 
 export default function RouteHandler() {
   const pathname = usePathname();
@@ -37,10 +40,26 @@ export default function RouteHandler() {
     return <DashboardPage />;
   }
 
-  // Check for game routes: /game/xxxxx
-  const gameMatch = pathname.match(/^\/game\/([^\/]+)/);
+  // Check for game sub-routes first (more specific matches)
+  if (pathname.match(/^\/game\/[^\/]+\/trade\/?$/)) {
+    console.log('RouteHandler - Detected trade route');
+    return <TradePage />;
+  }
+
+  if (pathname.match(/^\/game\/[^\/]+\/territory\/?$/)) {
+    console.log('RouteHandler - Detected territory route');
+    return <TerritoryPage />;
+  }
+
+  if (pathname.match(/^\/game\/[^\/]+\/npcs\/?$/)) {
+    console.log('RouteHandler - Detected NPCs route');
+    return <NPCsPage />;
+  }
+
+  // Check for game main route: /game/xxxxx
+  const gameMatch = pathname.match(/^\/game\/([^\/]+)\/?$/);
   if (gameMatch) {
-    console.log('RouteHandler - Detected game route, rendering GameClient');
+    console.log('RouteHandler - Detected game overview route');
     return <GameClient />;
   }
 
