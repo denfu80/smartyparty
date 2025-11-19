@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { GameLayout } from '@/components/layout/GameLayout';
 import { ResourceInventory } from '@/components/game/ResourceInventory';
 import { ProductionSummary } from '@/components/game/ProductionSummary';
@@ -14,9 +14,11 @@ import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestor
 import type { Game, Player, Station } from '@/lib/types/game';
 
 export default function GameClient() {
-  // Get gameId from catch-all route parameter
-  const params = useParams();
-  const gameId = Array.isArray(params.id) ? params.id[0] : (params.id as string);
+  // Get gameId from URL pathname for static export compatibility
+  const pathname = usePathname();
+  const gameId = pathname.split('/game/')[1]?.split('/')[0] || '';
+
+  console.log('GameClient loaded - Pathname:', pathname, 'GameID:', gameId);
 
   const { user } = useAuth();
 
