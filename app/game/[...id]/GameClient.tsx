@@ -13,10 +13,10 @@ import { db } from '@/lib/firebase/config';
 import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore';
 import type { Game, Player, Station } from '@/lib/types/game';
 
-export default function GamePage() {
-  // Get gameId from dynamic route parameter
+export default function GameClient() {
+  // Get gameId from catch-all route parameter
   const params = useParams();
-  const gameId = params.id as string;
+  const gameId = Array.isArray(params.id) ? params.id[0] : (params.id as string);
 
   const { user } = useAuth();
 
