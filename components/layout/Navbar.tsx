@@ -74,6 +74,15 @@ export function Navbar() {
                     </p>
                     <p className="text-xs leading-none text-muted-foreground font-mono">
                       v{process.env.NEXT_PUBLIC_COMMIT_HASH?.substring(0, 7) || 'dev'}
+                      {process.env.NEXT_PUBLIC_BUILD_DATE && (
+                        <span className="ml-2">
+                          ({new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleDateString('de-DE', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric'
+                          })})
+                        </span>
+                      )}
                     </p>
                   </div>
                 </DropdownMenuLabel>
