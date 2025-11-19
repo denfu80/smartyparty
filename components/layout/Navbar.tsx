@@ -76,10 +76,12 @@ export function Navbar() {
                       v{process.env.NEXT_PUBLIC_COMMIT_HASH?.substring(0, 7) || 'dev'}
                       {process.env.NEXT_PUBLIC_BUILD_DATE && (
                         <span className="ml-2">
-                          ({new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleDateString('de-DE', {
+                          ({new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleString('de-DE', {
                             day: '2-digit',
                             month: '2-digit',
-                            year: 'numeric'
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
                           })})
                         </span>
                       )}
