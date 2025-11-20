@@ -6,12 +6,15 @@ import { GameLayout } from '@/components/layout/GameLayout';
 import { ResourceInventory } from '@/components/game/ResourceInventory';
 import { ProductionSummary } from '@/components/game/ProductionSummary';
 import { GameMap } from '@/components/game/GameMap';
+import { NpcCard } from '@/components/game/NpcCard';
+import { NpcDialogModal } from '@/components/game/NpcDialogModal';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { useRoundState } from '@/lib/hooks/useRoundState';
 import { getGame, addPlayerToGame } from '@/lib/services/gameService';
 import { db } from '@/lib/firebase/config';
 import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore';
-import type { Game, Player, Station } from '@/lib/types/game';
+import type { Game, Player, Station, NPC } from '@/lib/types/game';
+import { NPCS } from '@/lib/config/npcs';
 
 export default function GameClient() {
   // Get gameId from URL pathname for static export compatibility
@@ -28,7 +31,20 @@ export default function GameClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // NPC Dialog State (Story #2)
+  const [selectedNpc, setSelectedNpc] = useState<NPC | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const { currentRound } = useRoundState(gameId);
+
+  // Handle NPC speak click
+  const handleNpcSpeak = (npcId: string) => {
+    const npc = Object.values(NPCS).find((n) => n.id === npcId);
+    if (npc) {
+      setSelectedNpc(npc);
+      setIsDialogOpen(true);
+    }
+  };
 
   // Load game data
   useEffect(() => {
@@ -181,7 +197,30 @@ export default function GameClient() {
             stations={stations}
           />
         </div>
+
+        {/* NPCs - Story #2 */}
+        <div className="bg-card border rounded-lg p-6">
+          <h2 className="text-2xl font-bold mb-4">NPCs</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Object.values(NPCS).map((npc) => (
+              <NpcCard
+                key={npc.id}
+                npc={npc}
+                onSpeakClick={handleNpcSpeak}
+              />
+            ))}
+          </div>
+        </div>
       </div>
+
+      {/* NPC Dialog Modal */}
+      <NpcDialogModal
+        npc={selectedNpc}
+        gameId={gameId}
+        playerId={player.id}
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
     </GameLayout>
   );
 }
