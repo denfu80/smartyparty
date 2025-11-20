@@ -13,10 +13,12 @@ import { db } from '@/lib/firebase/config';
 import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore';
 import type { Game, Player, Station } from '@/lib/types/game';
 
-export default function GamePage() {
-  // Parse gameId from URL pathname (e.g., /game/abc123 -> abc123)
+export default function GameClient() {
+  // Get gameId from URL pathname for static export compatibility
   const pathname = usePathname();
   const gameId = pathname.split('/game/')[1]?.split('/')[0] || '';
+
+  console.log('GameClient loaded - Pathname:', pathname, 'GameID:', gameId);
 
   const { user } = useAuth();
 
