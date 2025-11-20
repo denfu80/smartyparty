@@ -21,20 +21,16 @@ interface GameLayoutProps {
 
 export function GameLayout({ children, gameId, playerStats }: GameLayoutProps) {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-
-      <div className="flex">
-        {/* Desktop: Always visible, Mobile: Hidden */}
-        <div className="hidden md:block">
-          <GameSidebar gameId={gameId} playerStats={playerStats} />
-        </div>
-
-        {/* Main Content Area */}
-        <main className="flex-1 p-6">
-          {children}
-        </main>
+    <div className="flex">
+      {/* Desktop: Always visible, Mobile: Hidden */}
+      <div className="hidden md:block">
+        <GameSidebar gameId={gameId} playerStats={playerStats} />
       </div>
+
+      {/* Main Content Area */}
+      <main className="flex-1 p-6">
+        {children}
+      </main>
     </div>
   );
 }
